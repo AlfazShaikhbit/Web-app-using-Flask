@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Logs</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('{{ url_for('static', filename='logs-bg.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            padding: 50px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Container styling */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        /* Header styling */
+        header {
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #343a40;
+            text-align: center;
+        }
+
+        /* Table styling */
+        .logs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 1rem;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        /* Footer styling */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .button {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>User Logs for {{ current_user.username }}</h1>
+        </header>
+        <table class="logs-table">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Timestamp</th>
+                    <th>Duration (minutes)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for log in logs %}
+                    <tr>
+                        <td>{{ log.action }}</td>
+                        <td>{{ log.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>
+                            {% if log.duration %}
+                                {{ "%.2f" % log.duration }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <footer>
+            <a href="{{ url_for('dashboard') }}" class="button">Back to Dashboard</a>
+        </footer>
+    </div>
+</body>
+
+</html>
