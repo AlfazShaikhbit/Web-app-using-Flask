@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('{{ url_for('static', filename='background.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Overlay to darken background */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Main container styling */
+        .container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        /* Heading styling */
+        h1 {
+            font-size: 2.2rem;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        /* Button styling */
+        a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Hover effect */
+        a:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Welcome to the Flask App!</h1>
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+</body>
+
+</html>
